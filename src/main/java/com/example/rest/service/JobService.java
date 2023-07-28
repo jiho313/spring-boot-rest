@@ -25,4 +25,25 @@ public class JobService {
 	public Job getJob(String jobId) {
 		return jobMapper.getJobById(jobId);
 	}
+
+	public void deleteJob(String jobId) {
+		jobMapper.deleteJobById(jobId);
+	}
+
+	public Job updateJob(String jobId, Job job) {
+		Job savedJob = jobMapper.getJobById(jobId);
+		if (job.getTitle() != null) {
+			savedJob.setTitle(job.getTitle());
+		}
+		if (job.getMinSalary() != 0) {
+			savedJob.setMinSalary(job.getMinSalary());
+		}
+		if (job.getMaxSalary() != 0) {
+			savedJob.setMaxSalary(job.getMaxSalary());
+		}
+		
+		jobMapper.updateJob(savedJob);
+		
+		return savedJob;
+	}
 }
